@@ -19,7 +19,7 @@ jobs:
           cache: pip
           cache-dependency-path: pyproject.toml
       - name: Install the package
-        run: pip install -e ".[train,scrape,dev]"
+        run: pip install -e ".[train,scrape,scan,dev]"
       - name: Lint
         run: ruff check .
       - name: Run tests

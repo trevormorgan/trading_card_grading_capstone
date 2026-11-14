@@ -20,15 +20,19 @@ dependencies = [
 [project.optional-dependencies]
 train = ["tensorflow>=2.16"]
 scrape = ["requests>=2.31", "beautifulsoup4>=4.12", "pandas>=2.0"]
+scan = ["opencv-python-headless>=4.8"]
 notebooks = ["pandas>=2.0", "matplotlib>=3.8", "seaborn>=0.13", "jupyter"]
 dev = ["pytest>=8.0", "ruff>=0.6"]
-all = ["card-grading[train,scrape,notebooks,dev]"]
+all = ["card-grading[train,scrape,scan,notebooks,dev]"]
 
 [project.scripts]
 card-grading-scrape = "card_grading.scraping:main"
+card-grading-fetch-psa = "card_grading.psa_api:main"
 card-grading-crop = "card_grading.cropping:main"
 card-grading-flip = "card_grading.augmentation:main"
 card-grading-train = "card_grading.training:main"
+card-grading-split-scan = "card_grading.scans:main"
+card-grading-assess = "card_grading.assess:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

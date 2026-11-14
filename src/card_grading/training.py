@@ -143,7 +143,9 @@ def make_dataset(paths: list[str], grades: np.ndarray, image_size: tuple[int, in
     """Batches of (images with values 0-255, targets) for the image files."""
 
     def load(path, target):
-        image = tf.io.decode_jpeg(tf.io.read_file(path), channels=3)
+        # decode_image reads JPEG and PNG files alike
+        image = tf.io.decode_image(tf.io.read_file(path), channels=3, expand_animations=False)
+        image.set_shape([None, None, 3])
         return tf.image.resize(image, image_size), target
 
     dataset = tf.data.Dataset.from_tensor_slices((list(paths), ordinal_targets(np.asarray(grades), label_sigma)))
